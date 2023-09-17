@@ -3,7 +3,7 @@
 #include "decl.h"
 
 // Generic code generator
-// Copyright (c) 2019 Warren Toomey, GPL3
+
 
 // Given an AST, generate
 // assembly code recursively
@@ -44,4 +44,7 @@ void genfreeregs() {
 }
 void genprintint(int reg) {
   cgprintint(reg);
+}
+void genglobsym(char *s) {
+  cgglobsym(s);
 }

@@ -3,7 +3,6 @@
 #include "decl.h"
 
 // Code generator for x86-64
-// Copyright (c) 2019 Warren Toomey, GPL3
 
 
 // List of available registers
@@ -121,4 +120,8 @@ void cgprintint(int r) {
   fprintf(Outfile, "\tmovq\t%s, %%rdi\n", reglist[r]);
   fprintf(Outfile, "\tcall\tprintint\n");
   free_register(r);
+}
+// Generate a global symbol
+void cgglobsym(char *sym) {
+  fprintf(Outfile, "\t.comm\t%s,8,8\n", sym);
 }

@@ -6,7 +6,7 @@
 #include <errno.h>
 
 // Compiler setup and top-level execution
-// Copyright (c) 2019 Warren Toomey, GPL3
+
 
 // Initialise global variables
 static void init() {
@@ -18,6 +18,23 @@ static void init() {
 static void usage(char *prog) {
   fprintf(stderr, "Usage: %s infile\n", prog);
   exit(1);
+}
+
+
+
+// Loop scanning in all the tokens in the input file.
+// Print out details of each token found.
+static void scanfile() {
+  struct token T;
+
+  while (scan(&T)) {
+    printf("Token %d", T.token);
+    if (T.token == T_INTLIT)
+      printf(", value %d", T.intvalue);
+    if (T.token == T_IDENTIFIER) 
+      printf(", var_name %s", T.var_name);
+    printf("\n");
+  }
 }
 
 // Main program: check arguments and print a usage
@@ -41,10 +58,6 @@ void main(int argc, char *argv[]) {
     exit(1);
   }
 
-  scan(&Token);			// Get the first token from the input
-  genpreamble();		// Output the preamble
-  statements();			// Parse the statements in the input
-  genpostamble();		// Output the postamble
-  fclose(Outfile);		// Close the output file and exit
+  scanfile();
   exit(0);
 }

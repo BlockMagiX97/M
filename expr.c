@@ -3,7 +3,7 @@
 #include "decl.h"
 
 // Parsing of expressions
-// Copyright (c) 2019 Warren Toomey, GPL3
+
 
 // Parse a primary factor and return an
 // AST node representing it.

@@ -4,19 +4,29 @@
 #include <ctype.h>
 
 // Structure and enum definitions
-// Copyright (c) 2019 Warren Toomey, GPL3
+
 
 #define TEXTLEN		512	// Length of symbols in input
+#define NSYMBOLS 1024
+
+struct symtable {
+  char *name;
+};
 
 // Token types
 enum {
-  T_EOF, T_PLUS, T_MINUS, T_STAR, T_SLASH, T_INTLIT, T_SEMI, T_PRINT
+  T_EOF, T_PLUS, T_MINUS, T_STAR, T_SLASH, T_INTLIT, T_SEMI, T_PRINT, T_INT, T_EQUALS, T_IDENTIFIER
 };
 
 // Token structure
 struct token {
   int token;			// Token type, from the enum list above
-  int intvalue;			// For T_INTLIT, the integer value
+  union {
+    int intvalue;			// For T_INTLIT, the integer value
+    char *var_name;
+  };
+  
+  
 };
 
 // AST node types
